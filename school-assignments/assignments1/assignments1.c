@@ -1,51 +1,42 @@
 #include <stdio.h>
+#define MAX 10000
 
 int main()
 {
-    int sum = 0;
-    int studentNum;
+    int scholarship[MAX];
+    int studentNum, totalScholarships;
+    int max = 0, left = 0, right, mid, sum, answer = 0;
+
     scanf("%d", &studentNum);
 
-    int scholarship[studentNum];
     for (int i = 0; i < studentNum; i++)
     {
         scanf("%d", &scholarship[i]);
-        sum += scholarship[i];
-    };
+        if (max < scholarship[i])
+            max = scholarship[i];
+    }
+    right = max;
 
-    int totalScholarships;
     scanf("%d", &totalScholarships);
 
-    int max = 0;
-
-    while (sum > totalScholarships)
+    while (left <= right)
     {
-        max = 0;
-
-        for (int i = 0; i < studentNum; i++)
-        {
-            if (max <= scholarship[i])
-            {
-                max = scholarship[i];
-            }
-        }
-
-        for (int i = 0; i < studentNum; i++)
-        {
-            if (max == scholarship[i])
-            {
-                scholarship[i] -= 1;
-            }
-        }
-
         sum = 0;
+        mid = (left + right) / 2;
         for (int i = 0; i < studentNum; i++)
+            sum += (scholarship[i] > mid) ? mid : scholarship[i];
+        
+        if (sum <= totalScholarships)
         {
-            sum += scholarship[i];
+            answer = mid;     
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid - 1;
         }
     }
 
-    printf("%d\n", max - 1);
-
+    printf("%d\n", answer);
     return 0;
 }
