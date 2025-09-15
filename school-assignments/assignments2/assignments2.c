@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 1000000
-#define shuffle 500000
+#define MAX 100000
+#define shuffle 50000
 int array[MAX];
 
 int main()
 {
     srand((unsigned)time(NULL));
+    int max_num = 0;
+    int max_idx = 0;
 
     for (int i = 0; i < MAX; i++)
     {
@@ -28,6 +30,27 @@ int main()
         int temp = array[a];
         array[a] = array[b];
         array[b] = temp;
+    }
+
+    int n = MAX;
+    while (n > 1)
+    {
+        max_idx = 0;
+        max_num = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (max_num < array[i])
+            {
+                max_num = array[i];
+                max_idx = i;
+            }
+        }
+
+        int temp = array[max_idx];
+        array[max_idx] = array[n - 1];
+        array[n - 1] = temp;
+
+        n--;
     }
 
     FILE *fp = fopen("C:/Algorithm_Study/school-assignments/assignments2/data.txt", "w");
