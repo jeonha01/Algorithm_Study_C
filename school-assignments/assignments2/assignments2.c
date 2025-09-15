@@ -32,6 +32,37 @@ int main()
         array[b] = temp;
     }
 
+    FILE *fp = fopen("C:/Algorithm_Study/school-assignments/assignments2/random_data.txt", "w");
+    if (fp == NULL)
+    {
+        perror("파일 열기 실패");
+        return 1;
+    }
+
+    for (int i = 0; i < MAX; i++)
+    {
+        fprintf(fp, "%d\n", array[i]);
+    }
+
+    fclose(fp);
+
+    fp = fopen("C:/Algorithm_Study/school-assignments/assignments2/random_data.txt", "r");
+    if (fp == NULL)
+    {
+        perror("파일 열기 실패 (읽기)");
+        return 1;
+    }
+    for (int i = 0; i < MAX; i++)
+    {
+        if (fscanf(fp, "%d", &array[i]) != 1)
+        {
+            fprintf(stderr, "파일에서 숫자 읽기 실패\n");
+            fclose(fp);
+            return 1;
+        }
+    }
+    fclose(fp);
+
     int n = MAX;
     while (n > 1)
     {
@@ -53,18 +84,16 @@ int main()
         n--;
     }
 
-    FILE *fp = fopen("C:/Algorithm_Study/school-assignments/assignments2/data.txt", "w");
+    fp = fopen("C:/Algorithm_Study/school-assignments/assignments2/sorted_data.txt", "w");
     if (fp == NULL)
     {
-        perror("파일 열기 실패");
+        perror("파일 열기 실패 (정렬 결과 저장)");
         return 1;
     }
-
     for (int i = 0; i < MAX; i++)
     {
         fprintf(fp, "%d\n", array[i]);
     }
-
     fclose(fp);
 
     return 0;
