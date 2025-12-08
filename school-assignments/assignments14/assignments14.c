@@ -9,16 +9,16 @@ int main()
     scanf("%d %d", &K, &N);
 
     long long sum;
-    int left = 1;
-    int right = 0;
-    int mid, answer = 0;
+    long long left = 1;
+    long long right = 0;
+    long long mid, answer = 0;
 
     for (int i = 0; i < K; i++)
     {
         scanf("%d", &array[i]);
         if (right < array[i])
         {
-            right = array[i];
+            right = array[i];   
         }
     }
 
@@ -29,7 +29,7 @@ int main()
 
         for (int i = 0; i < K; i++)
         {
-            sum += array[i] / mid;
+            sum += array[i] / mid;  
         }
 
         if (sum >= N)
@@ -43,6 +43,6 @@ int main()
         }
     }
 
-    printf("%d\n", answer);
+    printf("%lld\n", answer);
     return 0;
 }
